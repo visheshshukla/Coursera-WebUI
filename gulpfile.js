@@ -2,6 +2,7 @@
 
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
+    del = require('del'),
     browserSync = require('browser-sync');
 
     gulp.task('sass', function () {
@@ -29,6 +30,16 @@ var gulp = require('gulp'),
          });
       
       });
+
+      // Clean
+        gulp.task('clean', function() {
+            return del(['dist']);
+        });
+
+        gulp.task('copyfonts', function() {
+        gulp.src('./node_modules/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
+        .pipe(gulp.dest('./dist/fonts'));
+        });
       
       // Default task
       gulp.task('default', ['browser-sync'], function() {
