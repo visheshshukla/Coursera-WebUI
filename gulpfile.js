@@ -3,6 +3,7 @@
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
     del = require('del'),
+    imagemin = require('gulp-imagemin'),
     browserSync = require('browser-sync');
 
     gulp.task('sass', function () {
@@ -39,6 +40,13 @@ var gulp = require('gulp'),
         gulp.task('copyfonts', function() {
         gulp.src('./node_modules/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
         .pipe(gulp.dest('./dist/fonts'));
+        });
+
+    // Images
+        gulp.task('imagemin', function() {
+            return gulp.src('img/*.{png,jpg,gif}')
+            .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
+            .pipe(gulp.dest('dist/img'));
         });
       
       // Default task
